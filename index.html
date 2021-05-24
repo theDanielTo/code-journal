@@ -10,15 +10,60 @@
     crossorigin="anonymous"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-  </header>
-  <main>
-  </main>
+    <header>
+      <div class="container">
+        <div class="row">
+          <h2 class="column-full">Code Journal</h2>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="container" data-view="entry-form">
+        <form>
+          <div class="row">
+            <div class="column-full">
+              <h1>New Entry</h1>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="column-half">
+              <img
+                id="form-image"
+                src="images/placeholder-image-square.jpg"
+                alt="Placeholder image">
+            </div>
+            <div class="column-half">
+              <label for="entry-title">
+                <h3>Title</h3>
+              </label>
+              <input id="title-input" name="entry-title" type="text" required>
+              <label for="entry-photo-url">
+                <h3>Photo URL</h3>
+              </label>
+              <input name="entry-photo-url" id="entry-photo-url" type="text" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="column-full">
+              <label for="entry-notes">
+                <h3>Notes</h3>
+              </label>
+              <textarea name="entry-notes" id="new-entry-notes" cols="30" rows="6" required></textarea>
+              <button type="submit" class="purple-rounded-btn">SAVE</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
