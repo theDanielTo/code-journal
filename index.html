@@ -19,8 +19,13 @@
 <body>
     <header>
       <div class="container">
-        <div class="row">
-          <h2 class="column-full">Code Journal</h2>
+        <div class="header-tabs row">
+          <div class="header-tab">
+            <h2>Code Journal</h2>
+          </div>
+          <div class="header-tab">
+            <h3>Entries</h3>
+          </div>
         </div>
       </div>
     </header>
@@ -58,10 +63,31 @@
                 <h3>Notes</h3>
               </label>
               <textarea name="entry-notes" id="new-entry-notes" cols="30" rows="6" required></textarea>
-              <button type="submit" class="purple-rounded-btn">SAVE</button>
+              <button class="purple-rounded-btn save-btn">SAVE</button>
             </div>
           </div>
         </form>
+      </div>
+
+      <div class="container" data-view="entries">
+        <div class="row column-full entries-header">
+          <h1>Entries</h1>
+          <button class="purple-rounded-btn new-btn">NEW</button>
+        </div>
+
+        <ol>
+          <div class="row">
+            <div class="column-half">
+              <img src="https://www.bbvaopenmind.com/wp-content/uploads/2015/12/Ada_Lovelace_Chalon_portrait-1-1024x1024-1.jpg" alt="Ada_Lovelace_Chalon_portrait-1-1024x1024-1">
+            </div>
+            <div class="column-half">
+              <h3>Ada Lovelace</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae nisi ac metus vulputate rhoncus ut ut turpis. Nullam
+              euismod nunc tortor, ut luctus turpis consectetur at. Fusce eget ipsum ut purus volutpat dignissim. Quisque vitae purus
+              eget elit ornare feugiat at sit amet nulla.</p>
+            </div>
+          </div>
+        </ol>
       </div>
     </main>
   <script src="js/data.js"></script>

@@ -1,6 +1,5 @@
 /* global data */
 /* exported data */
-// https://www.bbvaopenmind.com/wp-content/uploads/2015/12/Ada_Lovelace_Chalon_portrait-1-1024x1024-1.jpg
 
 const entryForm = document.querySelector('form');
 const formImg = document.querySelector('#form-image');
