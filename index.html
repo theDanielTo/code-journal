@@ -17,24 +17,44 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-    <h2 class="row">Code Journal</h2>
-  </header>
-  <main>
-    <div data-view="entry-form">
-      <form class="new-entry">
-        <h1>New Entry</h1>
-        <img src="images/placeholder-image-square.jpg" alt="Placeholder image">
-        <h3>Title</h3>
-        <input type="text" required>
-        <h3>Photo URL</h3>
-        <input type="text" required>
-        <h3>Notes</h3>
-        <textarea name="notes" id="notes" cols="30" rows="6" required></textarea>
-        <button class="purple-rounded-btn">SAVE</button>
-      </form>
-    </div>
-  </main>
+    <header>
+      <div class="container">
+        <div class="row">
+          <h2 class="column-full">Code Journal</h2>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="container" data-view="entry-form">
+        <form class="new-entry">
+          <div class="row">
+            <div class="column-full">
+              <h1>New Entry</h1>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="column-half">
+              <img src="images/placeholder-image-square.jpg" alt="Placeholder image">
+            </div>
+            <div class="column-half">
+              <h3>Title</h3>
+              <input type="text" required>
+              <h3>Photo URL</h3>
+              <input type="text" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="column-full">
+              <h3>Notes</h3>
+              <textarea name="notes" id="notes" cols="30" rows="6" required></textarea>
+              <button class="purple-rounded-btn">SAVE</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
