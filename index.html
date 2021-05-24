@@ -10,14 +10,30 @@
     crossorigin="anonymous"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header>
+    <h2 class="row">Code Journal</h2>
   </header>
   <main>
+    <div data-view="entry-form">
+      <form class="new-entry">
+        <h1>New Entry</h1>
+        <img src="images/placeholder-image-square.jpg" alt="Placeholder image">
+        <h3>Title</h3>
+        <input type="text" required>
+        <h3>Photo URL</h3>
+        <input type="text" required>
+        <h3>Notes</h3>
+        <textarea name="notes" id="notes" cols="30" rows="6" required></textarea>
+        <button class="purple-rounded-btn">SAVE</button>
+      </form>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

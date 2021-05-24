@@ -1,0 +1,54 @@
+html {
+  font-family: 'Open Sans', sans-serif;
+}
+
+header {
+  background-color: #562b81;
+  color: white;
+  padding: 10px 30px;
+  letter-spacing: 0.1em;
+  font-size: 1.2em;
+}
+
+form {
+  margin: 30px;
+}
+
+img,
+input,
+textarea {
+  border-radius: 5px;
+  width: 100%;
+}
+
+input,
+textarea {
+  padding: 15px;
+  font-size: 1.5em;
+  border-color: #b6b6b6;
+}
+
+textarea {
+  font-size: 1.7em;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h3 {
+  font-size: 1.5em;
+  margin: 40px 0 20px;
+}
+
+.purple-rounded-btn {
+  float: right;
+  background-color: #562b81;
+  color: white;
+  margin: 30px 0;
+  padding: 10px 20px;
+  font-size: 1.5em;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+}
