@@ -22,11 +22,6 @@ button:hover {
   cursor: pointer;
 }
 
-img {
-  object-fit: cover;
-  height: 22em;
-}
-
 header {
   background-color: #562b81;
   color: white;
@@ -86,6 +81,11 @@ textarea {
   font-size: 1.7em;
 }
 
+.column-half > img {
+  object-fit: cover;
+  height: 22em;
+}
+
 .save-btn {
   float: right;
 }
@@ -98,4 +98,11 @@ ol {
   list-style: none;
   margin-top: 2em;
   padding: 0;
+}
+
+#edit-icon {
+  float: right;
+  width: 30px;
+  color: #562b81;
+  cursor: pointer;
 }
