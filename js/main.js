@@ -80,6 +80,9 @@ window.addEventListener('DOMContentLoaded', function (event) {
   for (const entry of data.entries) {
     $entriesList.appendChild(renderEntry(entry));
   }
+  if ($entriesList.childElementCount > 1) {
+    document.querySelector('#no-entries-p').className = 'hidden';
+  }
 });
 
 function renderEntry(entry) {
