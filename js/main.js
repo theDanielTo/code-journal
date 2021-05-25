@@ -9,6 +9,7 @@ const $formImg = document.querySelector('#form-image');
 const $titleInput = document.querySelector('#title-input');
 const $photoUrlInput = document.querySelector('#entry-photo-url');
 const $notesTextArea = document.querySelector('#new-entry-notes');
+const $deleteBtn = document.querySelector('.delete-btn');
 
 const $entriesList = document.querySelector('ol');
 const $newEntryBtn = document.querySelector('#new-btn');
@@ -52,6 +53,7 @@ $entryForm.addEventListener('submit', function (event) {
   event.preventDefault();
 
   if (data.editing !== null) {
+
     data.editing.title = $titleInput.value;
     data.editing.imgUrl = $photoUrlInput.value;
     data.editing.notes = $notesTextArea.value;
@@ -118,7 +120,7 @@ function renderEntry(entry) {
   const $textCol = document.createElement('div');
   $textCol.setAttribute('class', 'column-half');
   const $titleRow = document.createElement('div');
-  $titleRow.setAttribute('class', 'row title-row');
+  $titleRow.setAttribute('class', 'row space-between');
   const $title = document.createElement('h3');
   const $editIcon = document.createElement('img');
   $editIcon.src = 'images/editicon.svg';
@@ -140,6 +142,7 @@ function renderEntry(entry) {
       data.view = 'entry-form';
       for (const entry of data.entries) {
         if (entry.id === parseInt($divRow.getAttribute('data-entry-id'))) {
+          $deleteBtn.className = 'delete-btn';
           data.editing = entry;
           $formImg.setAttribute('src', entry.imgUrl);
           $titleInput.value = entry.title;
@@ -159,3 +162,7 @@ function renderEntry(entry) {
 
   return $divRow;
 }
+
+$deleteBtn.addEventListener('click', function (event) {
+
+});
