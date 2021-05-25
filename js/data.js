@@ -7,10 +7,10 @@ var data = {
   nextEntryId: 1
 };
 
-const prevDataJSON = window.localStorage.getItem('journal-local-storage');
-if (prevDataJSON !== null) data = JSON.parse(prevDataJSON);
+const prevDataJson = window.localStorage.getItem('journal-local-storage');
+if (prevDataJson !== null) data = JSON.parse(prevDataJson);
 
 window.addEventListener('beforeunload', function (event) {
-  const dataJSON = JSON.stringify(data);
-  window.localStorage.setItem('journal-local-storage', dataJSON);
+  const dataJson = JSON.stringify(data);
+  window.localStorage.setItem('journal-local-storage', dataJson);
 });

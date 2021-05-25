@@ -19,25 +19,24 @@
 <body>
     <header>
       <div class="container">
-        <div class="header-tabs row">
-          <div class="header-tab">
+        <nav class="header-tabs row">
+          <a class="header-tab" data-view="entry-form">
             <h2>Code Journal</h2>
-          </div>
-          <div class="header-tab">
+          </a>
+          <a class="header-tab" data-view="entries">
             <h3>Entries</h3>
-          </div>
-        </div>
+          </a>
+        </nav>
       </div>
     </header>
     <main>
-      <div class="container" data-view="entry-form">
+      <div class="container page" data-view="entry-form">
         <form>
           <div class="row">
             <div class="column-full">
               <h1>New Entry</h1>
             </div>
           </div>
-
           <div class="row">
             <div class="column-half">
               <img
@@ -56,7 +55,6 @@
               <input name="entry-photo-url" id="entry-photo-url" type="text" required>
             </div>
           </div>
-
           <div class="row">
             <div class="column-full">
               <label for="entry-notes">
@@ -69,25 +67,12 @@
         </form>
       </div>
 
-      <div class="container" data-view="entries">
+      <div class="container page hidden" data-view="entries">
         <div class="row column-full entries-header">
           <h1>Entries</h1>
-          <button class="purple-rounded-btn new-btn">NEW</button>
+          <button class="purple-rounded-btn new-btn" data-view="entry-form">NEW</button>
         </div>
-
-        <ol>
-          <div class="row">
-            <div class="column-half">
-              <img src="https://www.bbvaopenmind.com/wp-content/uploads/2015/12/Ada_Lovelace_Chalon_portrait-1-1024x1024-1.jpg" alt="Ada_Lovelace_Chalon_portrait-1-1024x1024-1">
-            </div>
-            <div class="column-half">
-              <h3>Ada Lovelace</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae nisi ac metus vulputate rhoncus ut ut turpis. Nullam
-              euismod nunc tortor, ut luctus turpis consectetur at. Fusce eget ipsum ut purus volutpat dignissim. Quisque vitae purus
-              eget elit ornare feugiat at sit amet nulla.</p>
-            </div>
-          </div>
-        </ol>
+        <ol></ol>
       </div>
     </main>
   <script src="js/data.js"></script>
