@@ -58,10 +58,13 @@ $entryForm.addEventListener('submit', function (event) {
     const dataEntriesIndexChange = data.entries.length - data.editing.id;
     data.entries[dataEntriesIndexChange] = data.editing;
 
-    for (let $entry of $entriesList.childNodes) {
-      if ($entry.className === 'row') {
-        if (parseInt($entry.getAttribute('data-entry-id')) === data.editing.id) {
-          $entry = data.editing;
+    for (let i = 0; i < $entriesList.childNodes.length; i++) {
+      for (const $entry of $entriesList.childNodes) {
+        if ($entry.className === 'row') {
+          const entryIdNum = parseInt($entry.getAttribute('data-entry-id'));
+          if (entryIdNum === data.editing.id) {
+            $entriesList.replaceChild(renderEntry(data.editing), $entry);
+          }
         }
       }
     }
@@ -96,7 +99,7 @@ $entryForm.addEventListener('submit', function (event) {
   data.editing = null;
 });
 
-window.addEventListener('DOMContentLoaded', function (event) {
+document.addEventListener('DOMContentLoaded', function (event) {
   for (const entry of data.entries) {
     $entriesList.appendChild(renderEntry(entry));
   }
@@ -115,7 +118,7 @@ function renderEntry(entry) {
   const $textCol = document.createElement('div');
   $textCol.setAttribute('class', 'column-half');
   const $titleRow = document.createElement('div');
-  $titleRow.setAttribute('class', 'row');
+  $titleRow.setAttribute('class', 'row title-row');
   const $title = document.createElement('h3');
   const $editIcon = document.createElement('img');
   $editIcon.src = 'images/editicon.svg';
