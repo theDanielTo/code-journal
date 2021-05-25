@@ -19,20 +19,24 @@
 <body>
     <header>
       <div class="container">
-        <div class="row">
-          <h2 class="column-full">Code Journal</h2>
-        </div>
+        <nav class="header-tabs row">
+          <a class="header-tab" data-view="entry-form">
+            <h2>Code Journal</h2>
+          </a>
+          <a class="header-tab" data-view="entries">
+            <h3>Entries</h3>
+          </a>
+        </nav>
       </div>
     </header>
     <main>
-      <div class="container" data-view="entry-form">
+      <div class="container page" data-view="entry-form">
         <form>
           <div class="row">
             <div class="column-full">
               <h1>New Entry</h1>
             </div>
           </div>
-
           <div class="row">
             <div class="column-half">
               <img
@@ -51,17 +55,27 @@
               <input name="entry-photo-url" id="entry-photo-url" type="text" required>
             </div>
           </div>
-
           <div class="row">
             <div class="column-full">
               <label for="entry-notes">
                 <h3>Notes</h3>
               </label>
               <textarea name="entry-notes" id="new-entry-notes" cols="30" rows="6" required></textarea>
-              <button type="submit" class="purple-rounded-btn">SAVE</button>
+              <button class="purple-rounded-btn save-btn">SAVE</button>
             </div>
           </div>
         </form>
+      </div>
+
+      <div class="container page hidden" data-view="entries">
+        <div class="row column-full entries-header">
+          <h1>Entries</h1>
+          <button id="new-btn" class="purple-rounded-btn" data-view="entry-form">NEW</button>
+        </div>
+
+        <ol>
+          <p id="no-entries-p" class="align-center">No entries have been recorded.</p>
+        </ol>
       </div>
     </main>
   <script src="js/data.js"></script>
