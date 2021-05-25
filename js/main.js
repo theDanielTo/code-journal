@@ -1,6 +1,5 @@
 /* global data */
 /* exported data */
-// https://www.bbvaopenmind.com/wp-content/uploads/2015/12/Ada_Lovelace_Chalon_portrait-1-1024x1024-1.jpg
 
 const $headerContainer = document.querySelector('.header-tabs');
 const $pages = document.querySelectorAll('.page');
@@ -12,7 +11,17 @@ const $photoUrlInput = document.querySelector('#entry-photo-url');
 const $notesTextArea = document.querySelector('#new-entry-notes');
 
 const $entriesList = document.querySelector('ol');
-const $newEntryBtn = document.querySelector('.new-btn');
+const $newEntryBtn = document.querySelector('#new-btn');
+
+window.addEventListener('load', function (event) {
+  if (data.view === 'entry-form') {
+    $entryForm.parentElement.className = 'container page';
+    $entriesList.parentElement.className = 'container page hidden';
+  } else {
+    $entryForm.parentElement.className = 'container page hidden';
+    $entriesList.parentElement.className = 'container page';
+  }
+});
 
 $headerContainer.addEventListener('click', function () {
   if (event.target.parentNode.className === 'header-tab') {
@@ -20,7 +29,10 @@ $headerContainer.addEventListener('click', function () {
     for (const page of $pages) {
       if (page.getAttribute('data-view') === tabDataViewAttr) {
         page.className = 'container page';
-      } else page.className = 'container page hidden';
+        data.view = tabDataViewAttr;
+      } else {
+        page.className = 'container page hidden';
+      }
     }
   }
 });
@@ -28,6 +40,7 @@ $headerContainer.addEventListener('click', function () {
 $newEntryBtn.addEventListener('click', function () {
   $entryForm.parentElement.className = 'container page';
   $entriesList.parentElement.className = 'container page hidden';
+  data.view = 'entry-form';
 });
 
 $photoUrlInput.addEventListener('input', function (event) {
@@ -42,19 +55,25 @@ $entryForm.addEventListener('submit', function (event) {
     id: 0
   };
 
+  event.preventDefault();
   newEntry.title = $titleInput.value;
   newEntry.imgUrl = $photoUrlInput.value;
   newEntry.notes = $notesTextArea.value;
   newEntry.id = data.nextEntryId;
+
   data.nextEntryId++;
   data.entries.unshift(newEntry);
-  event.preventDefault();
+
   $formImg.src = 'images/placeholder-image-square.jpg';
-  $titleInput.value = '';
-  $photoUrlInput.value = '';
-  $notesTextArea.value = '';
+  $entryForm.reset();
+
+  $entriesList.prepend(renderEntry(newEntry));
+  if ($entriesList.childElementCount > 1) {
+    document.querySelector('#no-entries-p').className = 'hidden';
+  }
   $entryForm.parentElement.className = 'container page hidden';
   $entriesList.parentElement.className = 'container page';
+  data.view = 'entries';
 });
 
 window.addEventListener('DOMContentLoaded', function (event) {

@@ -14,13 +14,17 @@ html {
   align-self: center;
 }
 
+.align-center {
+  text-align: center;
+}
+
 button:hover {
   cursor: pointer;
 }
 
 img {
   object-fit: cover;
-  height: 25em;
+  height: 22em;
 }
 
 header {
@@ -88,10 +92,6 @@ textarea {
 
 .entries-header {
   justify-content: space-between;
-}
-
-.new-btn {
-  height: 100%;
 }
 
 ol {

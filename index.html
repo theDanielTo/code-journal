@@ -70,9 +70,12 @@
       <div class="container page hidden" data-view="entries">
         <div class="row column-full entries-header">
           <h1>Entries</h1>
-          <button class="purple-rounded-btn new-btn" data-view="entry-form">NEW</button>
+          <button id="new-btn" class="purple-rounded-btn" data-view="entry-form">NEW</button>
         </div>
-        <ol></ol>
+
+        <ol>
+          <p id="no-entries-p" class="align-center">No entries have been recorded.</p>
+        </ol>
       </div>
     </main>
   <script src="js/data.js"></script>
