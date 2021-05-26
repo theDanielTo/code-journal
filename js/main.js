@@ -194,10 +194,12 @@ $confirmBtn.addEventListener('click', function (event) {
   }
   $formImg.src = 'images/placeholder-image-square.jpg';
   $entryForm.reset();
+  $notesTextArea.textContent = '';
   data.editing = null;
   $entryForm.parentElement.className = 'container page hidden';
   $entriesList.parentElement.className = 'container page';
   $headerContainer.lastElementChild.className = 'header-tab';
   $deleteModal.className = 'delete-verify-modal hidden';
+  $greyedBg.className = 'modal-bg hidden';
   data.view = 'entries';
 });
