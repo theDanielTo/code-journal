@@ -10,6 +10,12 @@ const $titleInput = document.querySelector('#title-input');
 const $photoUrlInput = document.querySelector('#entry-photo-url');
 const $notesTextArea = document.querySelector('#new-entry-notes');
 
+const $greyedBg = document.querySelector('.modal-bg');
+const $deleteBtn = document.querySelector('.delete-btn');
+const $deleteModal = document.querySelector('.delete-verify-modal');
+const $cancelBtn = document.querySelector('.cancel-btn');
+const $confirmBtn = document.querySelector('.confirm-btn');
+
 const $entriesList = document.querySelector('ol');
 const $newEntryBtn = document.querySelector('#new-btn');
 
@@ -52,22 +58,22 @@ $entryForm.addEventListener('submit', function (event) {
   event.preventDefault();
 
   if (data.editing !== null) {
+
     data.editing.title = $titleInput.value;
     data.editing.imgUrl = $photoUrlInput.value;
     data.editing.notes = $notesTextArea.value;
     const dataEntriesIndexChange = data.entries.length - data.editing.id;
     data.entries[dataEntriesIndexChange] = data.editing;
 
-    for (let i = 0; i < $entriesList.childNodes.length; i++) {
-      for (const $entry of $entriesList.childNodes) {
-        if ($entry.className === 'row') {
-          const entryIdNum = parseInt($entry.getAttribute('data-entry-id'));
-          if (entryIdNum === data.editing.id) {
-            $entriesList.replaceChild(renderEntry(data.editing), $entry);
-          }
+    for (const $entry of $entriesList.childNodes) {
+      if ($entry.className === 'row') {
+        const entryIdNum = parseInt($entry.getAttribute('data-entry-id'));
+        if (entryIdNum === data.editing.id) {
+          $entriesList.replaceChild(renderEntry(data.editing), $entry);
         }
       }
     }
+
   } else {
     const newEntry = {
       title: '',
@@ -118,7 +124,7 @@ function renderEntry(entry) {
   const $textCol = document.createElement('div');
   $textCol.setAttribute('class', 'column-half');
   const $titleRow = document.createElement('div');
-  $titleRow.setAttribute('class', 'row title-row');
+  $titleRow.setAttribute('class', 'row space-between');
   const $title = document.createElement('h3');
   const $editIcon = document.createElement('img');
   $editIcon.src = 'images/editicon.svg';
@@ -140,6 +146,7 @@ function renderEntry(entry) {
       data.view = 'entry-form';
       for (const entry of data.entries) {
         if (entry.id === parseInt($divRow.getAttribute('data-entry-id'))) {
+          $deleteBtn.className = 'delete-btn';
           data.editing = entry;
           $formImg.setAttribute('src', entry.imgUrl);
           $titleInput.value = entry.title;
@@ -159,3 +166,40 @@ function renderEntry(entry) {
 
   return $divRow;
 }
+
+$deleteBtn.addEventListener('click', function (event) {
+  $deleteModal.className = 'delete-verify-modal';
+  $greyedBg.className = 'modal-bg greyed-bg';
+});
+
+$cancelBtn.addEventListener('click', function (event) {
+  $deleteModal.className = 'delete-verify-modal hidden';
+  $greyedBg.className = 'modal-bg hidden';
+});
+
+$confirmBtn.addEventListener('click', function (event) {
+  for (const $entry of $entriesList.childNodes) {
+    if ($entry.className === 'row') {
+      const entryIdNum = parseInt($entry.getAttribute('data-entry-id'));
+      if (entryIdNum === data.editing.id) {
+        $entriesList.removeChild($entry);
+        for (let i = 0; i < data.entries.length; i++) {
+          if (data.entries[i].id === entryIdNum) {
+            data.entries.splice(i, 1);
+            break;
+          }
+        }
+      }
+    }
+  }
+  $formImg.src = 'images/placeholder-image-square.jpg';
+  $entryForm.reset();
+  $notesTextArea.textContent = '';
+  data.editing = null;
+  $entryForm.parentElement.className = 'container page hidden';
+  $entriesList.parentElement.className = 'container page';
+  $headerContainer.lastElementChild.className = 'header-tab';
+  $deleteModal.className = 'delete-verify-modal hidden';
+  $greyedBg.className = 'modal-bg hidden';
+  data.view = 'entries';
+});

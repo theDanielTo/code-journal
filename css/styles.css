@@ -14,8 +14,16 @@ html {
   align-self: center;
 }
 
+.position-absolution {
+  position: absolute;
+}
+
 .align-center {
   text-align: center;
+}
+
+.space-between {
+  justify-content: space-between;
 }
 
 button:hover {
@@ -108,11 +116,62 @@ ol {
   justify-self: space-between;
 }
 
-.title-row {
-  justify-content: space-between;
-}
-
 #edit-icon {
   width: 30px;
   cursor: pointer;
+}
+
+.delete-btn {
+  align-self: flex-end;
+  color: red;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.modal-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  height: 140%;
+  width: 100%;
+}
+
+.delete-verify-modal {
+  position: absolute;
+  top: 20%;
+  border: none;
+  border-radius: 10px;
+  width: 350px;
+  height: 150px;
+  margin-bottom: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: white;
+  text-align: center;
+}
+
+.modal-btn {
+  margin: 0 20px;
+  padding: 5px 10px;
+  font-size: 1.2em;
+  font-weight: 700;
+  border: none;
+  border-radius: 5px;
+}
+
+.cancel-btn {
+  background-color: #b6b6b6;
+  color: black;
+}
+
+.confirm-btn {
+  background-color: #dc2626;
+  color: white;
+}
+
+.greyed-bg {
+  background-color: rgba(0, 0, 0, 0.7);
 }
