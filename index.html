@@ -17,60 +17,56 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header>
-      <div class="container">
-        <nav class="header-tabs row">
-          <a class="header-tab" data-view="entry-form">
-            <h2>Code Journal</h2>
-          </a>
-          <a class="header-tab" data-view="entries">
-            <h3>Entries</h3>
-          </a>
-        </nav>
-      </div>
-    </header>
-
-    <main>
-      <div class="container page opened-modal-bg greyed-bg" data-view="entry-form">
-        <form>
-          <div class="row">
-            <div class="column-full">
-              <h1 id="form-header">New Entry</h1>
+  <header>
+    <div class="container">
+      <nav class="header-tabs row">
+        <a class="header-tab" data-view="entry-form">
+          <h2>Code Journal</h2>
+        </a>
+        <a class="header-tab" data-view="entries">
+          <h3>Entries</h3>
+        </a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container page position-absolute" data-view="entry-form">
+      <form>
+        <div class="row">
+          <div class="column-full">
+            <h1 id="form-header">New Entry</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-half">
+            <img id="form-image" src="images/placeholder-image-square.jpg" alt="Placeholder image">
+          </div>
+          <div class="column-half">
+            <label for="entry-title">
+              <h3>Title</h3>
+            </label>
+            <input id="title-input" name="entry-title" type="text" required>
+            <label for="entry-photo-url">
+              <h3>Photo URL</h3>
+            </label>
+            <input name="entry-photo-url" id="entry-photo-url" type="text" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <label for="entry-notes">
+              <h3>Notes</h3>
+            </label>
+            <textarea name="entry-notes" id="new-entry-notes" cols="30" rows="6" required></textarea>
+            <div class="row space-between">
+              <p class="delete-btn hidden">Delete Entry</p>
+              <button class="purple-rounded-btn save-btn">SAVE</button>
             </div>
           </div>
-          <div class="row">
-            <div class="column-half">
-              <img
-                id="form-image"
-                src="images/placeholder-image-square.jpg"
-                alt="Placeholder image">
-            </div>
-            <div class="column-half">
-              <label for="entry-title">
-                <h3>Title</h3>
-              </label>
-              <input id="title-input" name="entry-title" type="text" required>
-              <label for="entry-photo-url">
-                <h3>Photo URL</h3>
-              </label>
-              <input name="entry-photo-url" id="entry-photo-url" type="text" required>
-            </div>
-          </div>
-          <div class="row">
-            <div class="column-full">
-              <label for="entry-notes">
-                <h3>Notes</h3>
-              </label>
-              <textarea name="entry-notes" id="new-entry-notes" cols="30" rows="6" required></textarea>
-              <div class="row space-between">
-                <p class="delete-btn hidden">Delete Entry</p>
-                <button class="purple-rounded-btn save-btn">SAVE</button>
-              </div>
-            </div>
-          </div>
-        </form>
-
-        <div class="delete-verify-modal">
+        </div>
+      </form>
+      <div class="modal-bg hidden">
+        <div class="delete-verify-modal hidden">
           <p>Are you sure you want to delete this entry?</p>
           <div class="row space-between">
             <button class="modal-btn cancel-btn">CANCEL</button>
@@ -78,18 +74,17 @@
           </div>
         </div>
       </div>
-
-      <div class="container page hidden" data-view="entries">
-        <div class="row column-full entries-header">
-          <h1>Entries</h1>
-          <button id="new-btn" class="purple-rounded-btn" data-view="entry-form">NEW</button>
-        </div>
-
-        <ol>
-          <p id="no-entries-p" class="align-center">No entries have been recorded.</p>
-        </ol>
+    </div>
+    <div class="container page hidden" data-view="entries">
+      <div class="row column-full entries-header">
+        <h1>Entries</h1>
+        <button id="new-btn" class="purple-rounded-btn" data-view="entry-form">NEW</button>
       </div>
-    </main>
+      <ol>
+        <p id="no-entries-p" class="align-center">No entries have been recorded.</p>
+      </ol>
+    </div>
+  </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>

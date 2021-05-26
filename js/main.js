@@ -9,7 +9,12 @@ const $formImg = document.querySelector('#form-image');
 const $titleInput = document.querySelector('#title-input');
 const $photoUrlInput = document.querySelector('#entry-photo-url');
 const $notesTextArea = document.querySelector('#new-entry-notes');
+
+const $greyedBg = document.querySelector('.modal-bg');
 const $deleteBtn = document.querySelector('.delete-btn');
+const $deleteModal = document.querySelector('.delete-verify-modal');
+const $cancelBtn = document.querySelector('.cancel-btn');
+const $confirmBtn = document.querySelector('.confirm-btn');
 
 const $entriesList = document.querySelector('ol');
 const $newEntryBtn = document.querySelector('#new-btn');
@@ -60,16 +65,15 @@ $entryForm.addEventListener('submit', function (event) {
     const dataEntriesIndexChange = data.entries.length - data.editing.id;
     data.entries[dataEntriesIndexChange] = data.editing;
 
-    for (let i = 0; i < $entriesList.childNodes.length; i++) {
-      for (const $entry of $entriesList.childNodes) {
-        if ($entry.className === 'row') {
-          const entryIdNum = parseInt($entry.getAttribute('data-entry-id'));
-          if (entryIdNum === data.editing.id) {
-            $entriesList.replaceChild(renderEntry(data.editing), $entry);
-          }
+    for (const $entry of $entriesList.childNodes) {
+      if ($entry.className === 'row') {
+        const entryIdNum = parseInt($entry.getAttribute('data-entry-id'));
+        if (entryIdNum === data.editing.id) {
+          $entriesList.replaceChild(renderEntry(data.editing), $entry);
         }
       }
     }
+
   } else {
     const newEntry = {
       title: '',
@@ -164,5 +168,37 @@ function renderEntry(entry) {
 }
 
 $deleteBtn.addEventListener('click', function (event) {
+  $deleteModal.className = 'delete-verify-modal';
+  $greyedBg.className = 'modal-bg greyed-bg';
+  document.querySelector('main').className = 'grey-bg';
+});
 
+$cancelBtn.addEventListener('click', function (event) {
+  $deleteModal.className = 'delete-verify-modal hidden';
+  $greyedBg.className = 'modal-bg hidden';
+});
+
+$confirmBtn.addEventListener('click', function (event) {
+  for (const $entry of $entriesList.childNodes) {
+    if ($entry.className === 'row') {
+      const entryIdNum = parseInt($entry.getAttribute('data-entry-id'));
+      if (entryIdNum === data.editing.id) {
+        $entriesList.removeChild($entry);
+        for (let i = 0; i < data.entries.length; i++) {
+          if (data.entries[i].id === entryIdNum) {
+            data.entries.splice(i, 1);
+            break;
+          }
+        }
+      }
+    }
+  }
+  $formImg.src = 'images/placeholder-image-square.jpg';
+  $entryForm.reset();
+  data.editing = null;
+  $entryForm.parentElement.className = 'container page hidden';
+  $entriesList.parentElement.className = 'container page';
+  $headerContainer.lastElementChild.className = 'header-tab';
+  $deleteModal.className = 'delete-verify-modal hidden';
+  data.view = 'entries';
 });
