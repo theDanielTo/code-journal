@@ -9,6 +9,7 @@ const $formImg = document.querySelector('#form-image');
 const $titleInput = document.querySelector('#title-input');
 const $photoUrlInput = document.querySelector('#entry-photo-url');
 const $notesTextArea = document.querySelector('#new-entry-notes');
+const $saveBtn = document.querySelector('.save-btn');
 
 const $greyedBg = document.querySelector('.modal-bg');
 const $deleteBtn = document.querySelector('.delete-btn');
@@ -18,14 +19,15 @@ const $confirmBtn = document.querySelector('.confirm-btn');
 
 const $entriesList = document.querySelector('ol');
 const $newEntryBtn = document.querySelector('#new-btn');
+const $noEntriesP = document.querySelector('#no-entries-p');
 
 window.addEventListener('load', function (event) {
   if (data.view === 'entry-form') {
-    $entryForm.parentElement.className = 'container page';
-    $entriesList.parentElement.className = 'container page hidden';
+    $entryForm.parentElement.classList.remove('hidden');
+    $entriesList.parentElement.classList.add('hidden');
   } else {
-    $entryForm.parentElement.className = 'container page hidden';
-    $entriesList.parentElement.className = 'container page';
+    $entryForm.parentElement.classList.add('hidden');
+    $entriesList.parentElement.classList.remove('hidden');
   }
 });
 
@@ -34,10 +36,10 @@ $headerContainer.addEventListener('click', function () {
     const tabDataViewAttr = event.target.parentNode.getAttribute('data-view');
     for (const page of $pages) {
       if (page.getAttribute('data-view') === tabDataViewAttr) {
-        page.className = 'container page';
+        page.classList.remove('hidden');
         data.view = tabDataViewAttr;
       } else {
-        page.className = 'container page hidden';
+        page.classList.add('hidden');
       }
     }
   }
@@ -45,8 +47,10 @@ $headerContainer.addEventListener('click', function () {
 
 $newEntryBtn.addEventListener('click', function () {
   document.getElementById('form-header').textContent = 'New Entry';
-  $entryForm.parentElement.className = 'container page';
-  $entriesList.parentElement.className = 'container page hidden';
+  $deleteBtn.classList.add('hidden');
+  $saveBtn.parentElement.className = 'row flex-end';
+  $entryForm.parentElement.classList.remove('hidden');
+  $entriesList.parentElement.classList.add('hidden');
   data.view = 'entry-form';
 });
 
@@ -92,15 +96,16 @@ $entryForm.addEventListener('submit', function (event) {
 
     $entriesList.prepend(renderEntry(newEntry));
     if ($entriesList.childElementCount > 1) {
-      document.querySelector('#no-entries-p').className = 'hidden';
+      document.querySelector('#no-entries-p').classList.add('hidden');
     }
+    $notesTextArea.value = '';
   }
   $formImg.src = 'images/placeholder-image-square.jpg';
   $entryForm.reset();
 
-  $entryForm.parentElement.className = 'container page hidden';
-  $entriesList.parentElement.className = 'container page';
-  $headerContainer.lastElementChild.className = 'header-tab';
+  $entryForm.parentElement.classList.add('hidden');
+  $entriesList.parentElement.classList.remove('hidden');
+  $headerContainer.lastElementChild.classList.remove('hidden');
   data.view = 'entries';
   data.editing = null;
 });
@@ -110,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     $entriesList.appendChild(renderEntry(entry));
   }
   if ($entriesList.childElementCount > 1) {
-    document.querySelector('#no-entries-p').className = 'hidden';
+    $noEntriesP.className = 'hidden';
   }
 });
 
@@ -141,12 +146,13 @@ function renderEntry(entry) {
 
   $divRow.addEventListener('click', function (event) {
     if (event.target.id === 'edit-icon') {
-      $entryForm.parentElement.className = 'container page';
-      $entriesList.parentElement.className = 'container page hidden';
+      $saveBtn.parentElement.className = 'row space-between';
+      $entryForm.parentElement.classList.remove('hidden');
+      $entriesList.parentElement.classList.add('hidden');
       data.view = 'entry-form';
       for (const entry of data.entries) {
         if (entry.id === parseInt($divRow.getAttribute('data-entry-id'))) {
-          $deleteBtn.className = 'delete-btn';
+          $deleteBtn.classList.remove('hidden');
           data.editing = entry;
           $formImg.setAttribute('src', entry.imgUrl);
           $titleInput.value = entry.title;
@@ -154,7 +160,7 @@ function renderEntry(entry) {
           $notesTextArea.textContent = entry.notes;
 
           document.getElementById('form-header').textContent = 'Edit Entry';
-          $headerContainer.lastElementChild.className = 'header-tab hidden';
+          $headerContainer.lastElementChild.classList.add('hidden');
         }
       }
     }
@@ -168,21 +174,21 @@ function renderEntry(entry) {
 }
 
 $deleteBtn.addEventListener('click', function (event) {
-  $deleteModal.className = 'delete-verify-modal';
+  $deleteModal.classList.remove('hidden');
   $greyedBg.className = 'modal-bg greyed-bg';
 });
 
 $cancelBtn.addEventListener('click', function (event) {
-  $deleteModal.className = 'delete-verify-modal hidden';
-  $greyedBg.className = 'modal-bg hidden';
+  $deleteModal.classList.add('hidden');
+  $greyedBg.classList.add('hidden');
 });
 
 $confirmBtn.addEventListener('click', function (event) {
-  for (const $entry of $entriesList.childNodes) {
-    if ($entry.className === 'row') {
-      const entryIdNum = parseInt($entry.getAttribute('data-entry-id'));
+  for (const entry of $entriesList.childNodes) {
+    if (entry.className === 'row') {
+      const entryIdNum = parseInt(entry.getAttribute('data-entry-id'));
       if (entryIdNum === data.editing.id) {
-        $entriesList.removeChild($entry);
+        $entriesList.removeChild(entry);
         for (let i = 0; i < data.entries.length; i++) {
           if (data.entries[i].id === entryIdNum) {
             data.entries.splice(i, 1);
@@ -192,14 +198,18 @@ $confirmBtn.addEventListener('click', function (event) {
       }
     }
   }
+  if ($entriesList.childElementCount === 0) {
+    $noEntriesP.classList.remove('hidden');
+  }
   $formImg.src = 'images/placeholder-image-square.jpg';
   $entryForm.reset();
   $notesTextArea.textContent = '';
   data.editing = null;
-  $entryForm.parentElement.className = 'container page hidden';
-  $entriesList.parentElement.className = 'container page';
-  $headerContainer.lastElementChild.className = 'header-tab';
-  $deleteModal.className = 'delete-verify-modal hidden';
-  $greyedBg.className = 'modal-bg hidden';
+  $entryForm.parentElement.classList.add('hidden');
+  $entriesList.parentElement.classList.remove('hidden');
+  $headerContainer.lastElementChild.classList.remove('hidden');
+  $deleteBtn.classList.remove('hidden');
+  $deleteModal.classList.add('hidden');
+  $greyedBg.classList.add('hidden');
   data.view = 'entries';
 });
