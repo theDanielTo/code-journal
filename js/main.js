@@ -170,7 +170,6 @@ function renderEntry(entry) {
 $deleteBtn.addEventListener('click', function (event) {
   $deleteModal.className = 'delete-verify-modal';
   $greyedBg.className = 'modal-bg greyed-bg';
-  document.querySelector('main').className = 'grey-bg';
 });
 
 $cancelBtn.addEventListener('click', function (event) {
